@@ -5,3 +5,7 @@ __pycache__/
 report.html
 .idea/
 *.html
+# --- Secrets (for real projects) ---
+# In real projects, the credentials file should NEVER be committed.
+# Uncomment the line below to exclude it.
+# config/credentials.py
