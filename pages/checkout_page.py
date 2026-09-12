@@ -1,4 +1,5 @@
 from playwright.sync_api import Page, expect
+from locators.checkout_locators import CheckoutLocators
 
 
 class CheckoutPage:
@@ -6,12 +7,12 @@ class CheckoutPage:
 
     def __init__(self, page: Page):
         self.page = page
-        self.first_name = page.locator("#first-name")
-        self.last_name = page.locator("#last-name")
-        self.postal_code = page.locator("#postal-code")
-        self.continue_button = page.locator("#continue")
-        self.finish_button = page.locator("#finish")
-        self.complete_header = page.locator(".complete-header")
+        self.first_name = page.locator(CheckoutLocators.FIRST_NAME)
+        self.last_name = page.locator(CheckoutLocators.LAST_NAME)
+        self.postal_code = page.locator(CheckoutLocators.POSTAL_CODE)
+        self.continue_button = page.locator(CheckoutLocators.CONTINUE_BUTTON)
+        self.finish_button = page.locator(CheckoutLocators.FINISH_BUTTON)
+        self.complete_header = page.locator(CheckoutLocators.COMPLETE_HEADER)
 
     def fill_customer_info(self, first_name: str, last_name: str, postal_code: str):
         self.first_name.fill(first_name)

@@ -8,6 +8,7 @@ UI automation tests for [SauceDemo](https://www.saucedemo.com/) built with **Pyt
 - Playwright 1.62
 - pytest 9.1
 - Page Object Model
+- Locators separated from page logic
 
 ## 📁 Project Structure
 
@@ -16,15 +17,21 @@ qa-automation-showcase/
 ├── .github/
 │   └── workflows/
 │       └── tests.yml          # CI configuration
+├── locators/
+│   ├── __init__.py
+│   ├── login_locators.py      # Login page locators
+│   ├── inventory_locators.py  # Inventory page locators
+│   ├── cart_locators.py       # Cart page locators
+│   └── checkout_locators.py   # Checkout page locators
+├── pages/
+│   ├── login_page.py          # Login page object
+│   ├── inventory_page.py      # Inventory page object
+│   ├── cart_page.py           # Cart page object
+│   └── checkout_page.py       # Checkout page object
 ├── tests/
 │   ├── test_login.py          # Login tests
 │   ├── test_cart.py           # Cart tests
 │   └── test_checkout.py       # End-to-end checkout flow
-├── pages/
-│   ├── login_page.py
-│   ├── inventory_page.py
-│   ├── cart_page.py
-│   └── checkout_page.py
 ├── .gitignore
 ├── requirements.txt
 ├── pytest.ini
@@ -36,6 +43,16 @@ qa-automation-showcase/
 - **Login:** successful login, locked-out user, wrong password
 - **Cart:** add one item, add multiple items
 - **Checkout:** full end-to-end flow (login → cart → checkout → order complete)
+
+## 🏗️ Architecture
+
+The project follows **Page Object Model** with a separate **Locators** layer:
+
+- **`locators/`** — all CSS selectors in one place per page. If the UI changes, only locators need updating.
+- **`pages/`** — page objects with actions and assertions. No raw selectors inside — only references to locators.
+- **`tests/`** — clean, readable tests using page objects.
+
+This separation makes the framework maintainable and easy to scale.
 
 ## 🚀 How to Run
 
@@ -61,6 +78,11 @@ qa-automation-showcase/
 4. Run with visible browser:
    ```bash
    pytest tests/ -v --headed
+   ```
+
+5. Run only smoke tests:
+   ```bash
+   pytest tests/ -v -m smoke
    ```
 
 ## 📊 Test Report

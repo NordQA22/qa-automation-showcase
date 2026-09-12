@@ -1,4 +1,5 @@
 from playwright.sync_api import Page, expect
+from locators.cart_locators import CartLocators
 
 
 class CartPage:
@@ -8,8 +9,8 @@ class CartPage:
 
     def __init__(self, page: Page):
         self.page = page
-        self.checkout_button = page.locator("#checkout")
-        self.cart_items = page.locator(".cart_item")
+        self.checkout_button = page.locator(CartLocators.CHECKOUT_BUTTON)
+        self.cart_items = page.locator(CartLocators.CART_ITEMS)
 
     def expect_opened(self):
         expect(self.page).to_have_url(self.URL)
@@ -19,4 +20,3 @@ class CartPage:
 
     def proceed_to_checkout(self):
         self.checkout_button.click()
-        
