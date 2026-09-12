@@ -1,14 +1,24 @@
 # QA Automation Showcase
 
-UI automation tests for [SauceDemo](https://www.saucedemo.com/) built with **Python**, **Playwright**, and **pytest**.
+UI and API automation tests built with **Python**, **Playwright**, **pytest**, and **requests**.
 
 ## 🛠️ Tech Stack
 
 - Python 3.14
 - Playwright 1.62
 - pytest 9.1
+- requests 2.34
 - Page Object Model
 - Locators separated from page logic
+
+## 📋 About the Test Targets
+
+This project demonstrates UI and API testing techniques using two public practice resources:
+
+- **SauceDemo** (UI) — an e-commerce demo site with login, cart, and checkout flows.
+- **JSONPlaceholder** (API) — a free REST API for testing HTTP methods (GET, POST, PUT, DELETE).
+
+Both are widely used for QA practice and require no registration or API keys.
 
 ## 📁 Project Structure
 
@@ -16,22 +26,28 @@ UI automation tests for [SauceDemo](https://www.saucedemo.com/) built with **Pyt
 qa-automation-showcase/
 ├── .github/
 │   └── workflows/
-│       └── tests.yml          # CI configuration
+│       └── tests.yml              # CI configuration
+├── api_clients/
+│   ├── __init__.py
+│   └── posts_client.py            # API client for JSONPlaceholder
 ├── locators/
 │   ├── __init__.py
-│   ├── login_locators.py      # Login page locators
-│   ├── inventory_locators.py  # Inventory page locators
-│   ├── cart_locators.py       # Cart page locators
-│   └── checkout_locators.py   # Checkout page locators
+│   ├── login_locators.py
+│   ├── inventory_locators.py
+│   ├── cart_locators.py
+│   └── checkout_locators.py
 ├── pages/
-│   ├── login_page.py          # Login page object
-│   ├── inventory_page.py      # Inventory page object
-│   ├── cart_page.py           # Cart page object
-│   └── checkout_page.py       # Checkout page object
+│   ├── login_page.py
+│   ├── inventory_page.py
+│   ├── cart_page.py
+│   └── checkout_page.py
 ├── tests/
-│   ├── test_login.py          # Login tests
-│   ├── test_cart.py           # Cart tests
-│   └── test_checkout.py       # End-to-end checkout flow
+│   ├── api/
+│   │   ├── __init__.py
+│   │   └── test_posts.py          # API tests (GET, POST, PUT, DELETE)
+│   ├── test_login.py              # UI: login tests
+│   ├── test_cart.py               # UI: cart tests
+│   └── test_checkout.py           # UI: end-to-end checkout flow
 ├── .gitignore
 ├── requirements.txt
 ├── pytest.ini
@@ -40,19 +56,26 @@ qa-automation-showcase/
 
 ## ✅ Test Coverage
 
+### UI Tests (SauceDemo)
 - **Login:** successful login, locked-out user, wrong password
 - **Cart:** add one item, add multiple items
 - **Checkout:** full end-to-end flow (login → cart → checkout → order complete)
 
+### API Tests (JSONPlaceholder)
+- **GET:** retrieve single post, retrieve all posts, status codes (200/404)
+- **POST:** create a new post
+- **PUT:** update an existing post
+- **DELETE:** delete a post
+- **Validation:** response structure, required fields, data types
+
 ## 🏗️ Architecture
 
-The project follows **Page Object Model** with a separate **Locators** layer:
+The project follows **Page Object Model** (UI) and **API Client** (API) patterns with a separate **Locators** layer:
 
 - **`locators/`** — all CSS selectors in one place per page. If the UI changes, only locators need updating.
 - **`pages/`** — page objects with actions and assertions. No raw selectors inside — only references to locators.
-- **`tests/`** — clean, readable tests using page objects.
-
-This separation makes the framework maintainable and easy to scale.
+- **`api_clients/`** — API client classes with methods for each HTTP endpoint.
+- **`tests/`** — clean, readable tests using page objects and API clients.
 
 ## 🚀 How to Run
 
@@ -75,14 +98,19 @@ This separation makes the framework maintainable and easy to scale.
    pytest tests/ -v
    ```
 
-4. Run with visible browser:
+4. Run only UI tests:
    ```bash
-   pytest tests/ -v --headed
+   pytest tests/ -v -m ui
    ```
 
-5. Run only smoke tests:
+5. Run only API tests:
    ```bash
-   pytest tests/ -v -m smoke
+   pytest tests/ -v -m api
+   ```
+
+6. Run with visible browser:
+   ```bash
+   pytest tests/ -v --headed
    ```
 
 ## 📊 Test Report
