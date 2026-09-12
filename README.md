@@ -13,6 +13,7 @@ UI and API automation tests built with **Python**, **Playwright**, **pytest**, a
 - Playwright 1.62
 - pytest 9.1
 - requests 2.34
+- Allure 2.46
 - Page Object Model
 - Locators separated from page logic
 
@@ -97,8 +98,9 @@ The project follows **Page Object Model** (UI) and **API Client** (API) patterns
 - **`locators/`** — all CSS selectors in one place per page. If the UI changes, only locators need updating.
 - **`pages/`** — page objects with actions and assertions. No raw selectors inside — only references to locators.
 - **`api_clients/`** — API client classes with methods for each HTTP endpoint.
+- **`fixtures/`** — reusable pytest fixtures for setup (login, page initialization).
+- **`config/`** — test data and credentials.
 - **`tests/`** — clean, readable tests using page objects and API clients.
-
 
 ## 🌐 Cross-Browser Testing
 
@@ -109,6 +111,7 @@ All UI tests run across three browser engines:
 - **WebKit** — engine for Safari
 
 CI runs the full test suite on all three browsers in parallel using GitHub Actions matrix strategy.
+
 ## 🚀 How to Run
 
 1. Clone the repository:
@@ -144,19 +147,29 @@ CI runs the full test suite on all three browsers in parallel using GitHub Actio
    ```bash
    pytest tests/ -v --headed
    ```
-   
+
 7. Run tests in a specific browser:
    ```bash
    pytest tests/ -v --browser=chromium
    pytest tests/ -v --browser=firefox
    pytest tests/ -v --browser=webkit
+   ```
 
-## 📊 Test Report
+## 📊 Test Reports
 
-Generate an HTML report:
+### HTML Report
 
 ```bash
 pytest tests/ --html=report.html --self-contained-html
+```
+
+### Allure Report
+
+The project uses **Allure** for detailed reports with steps and screenshots on failure.
+
+```bash
+pytest tests/
+allure serve allure-results
 ```
 
 ---
