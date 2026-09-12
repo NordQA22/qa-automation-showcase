@@ -1,5 +1,10 @@
 # QA Automation Showcase
 
+![Playwright Tests](https://github.com/NordQA22/qa-automation-showcase/actions/workflows/tests.yml/badge.svg)
+![Python](https://img.shields.io/badge/Python-3.14-3776AB?logo=python&logoColor=white)
+![Playwright](https://img.shields.io/badge/Playwright-1.62-2EAD33?logo=playwright&logoColor=white)
+![pytest](https://img.shields.io/badge/pytest-9.1-0A9EDC?logo=pytest&logoColor=white)
+
 UI and API automation tests built with **Python**, **Playwright**, **pytest**, and **requests**.
 
 ## 🛠️ Tech Stack
