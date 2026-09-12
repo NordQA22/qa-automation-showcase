@@ -77,6 +77,16 @@ The project follows **Page Object Model** (UI) and **API Client** (API) patterns
 - **`api_clients/`** — API client classes with methods for each HTTP endpoint.
 - **`tests/`** — clean, readable tests using page objects and API clients.
 
+
+## 🌐 Cross-Browser Testing
+
+All UI tests run across three browser engines:
+
+- **Chromium** — engine for Chrome and Edge
+- **Firefox** — Mozilla's engine
+- **WebKit** — engine for Safari
+
+CI runs the full test suite on all three browsers in parallel using GitHub Actions matrix strategy.
 ## 🚀 How to Run
 
 1. Clone the repository:
@@ -112,6 +122,12 @@ The project follows **Page Object Model** (UI) and **API Client** (API) patterns
    ```bash
    pytest tests/ -v --headed
    ```
+   
+7. Run tests in a specific browser:
+   ```bash
+   pytest tests/ -v --browser=chromium
+   pytest tests/ -v --browser=firefox
+   pytest tests/ -v --browser=webkit
 
 ## 📊 Test Report
 
