@@ -9,3 +9,5 @@ report.html
 # In real projects, the credentials file should NEVER be committed.
 # Uncomment the line below to exclude it.
 # config/credentials.py
+allure-results/
+allure-report/

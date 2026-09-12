@@ -29,34 +29,26 @@ Both are widely used for QA practice and require no registration or API keys.
 
 ```
 qa-automation-showcase/
-├── .github/
-│   └── workflows/
-│       └── tests.yml              # CI configuration
-├── api_clients/
+├── .github/workflows/tests.yml    # CI с матрицей браузеров
+├── api_clients/                   # API-клиент
+├── config/
 │   ├── __init__.py
-│   └── posts_client.py            # API client for JSONPlaceholder
-├── locators/
+│   └── credentials.py             # ← credentials + note про real projects
+├── fixtures/
 │   ├── __init__.py
-│   ├── login_locators.py
-│   ├── inventory_locators.py
-│   ├── cart_locators.py
-│   └── checkout_locators.py
-├── pages/
-│   ├── login_page.py
-│   ├── inventory_page.py
-│   ├── cart_page.py
-│   └── checkout_page.py
+│   └── auth.py                    # ← фикстура авторизации
+├── locators/                      # все селекторы
+├── pages/                         # Page Object Model
 ├── tests/
-│   ├── api/
-│   │   ├── __init__.py
-│   │   └── test_posts.py          # API tests (GET, POST, PUT, DELETE)
-│   ├── test_login.py              # UI: login tests
-│   ├── test_cart.py               # UI: cart tests
-│   └── test_checkout.py           # UI: end-to-end checkout flow
-├── .gitignore
-├── requirements.txt
+│   ├── api/test_posts.py          # 9 API-тестов
+│   ├── test_login.py              # 3 UI-теста
+│   ├── test_cart.py               # 2 UI-теста
+│   └── test_checkout.py           # 1 end-to-end тест
+├── .gitignore                     # с примером исключения credentials
+├── conftest.py                    # подключает фикстуры
 ├── pytest.ini
-└── README.md
+├── requirements.txt
+└── README.md                      # с бейджем CI
 ```
 
 ## ✅ Test Coverage
