@@ -158,6 +158,8 @@ CI runs the full test suite on all three browsers in parallel using GitHub Actio
 
 ## 📊 Test Reports
 
+![Allure Report](docs/allure-report.png)
+
 ### HTML Report
 
 ```bash
