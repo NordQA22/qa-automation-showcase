@@ -1,7 +1,7 @@
+import allure
 import pytest
 from api_clients.posts_client import PostsClient
 
-pytestmark = pytest.mark.api
 
 @pytest.fixture
 def posts_client():
@@ -10,6 +10,10 @@ def posts_client():
     client.session.close()
 
 
+@allure.feature("Posts API")
+@allure.story("GET post")
+@allure.title("GET /posts/1 returns 200 and correct data")
+@allure.severity(allure.severity_level.CRITICAL)
 def test_get_post_returns_200(posts_client):
     """GET /posts/1 возвращает 200 и корректные данные."""
     response = posts_client.get_post(1)
@@ -21,6 +25,10 @@ def test_get_post_returns_200(posts_client):
     assert "body" in body
 
 
+@allure.feature("Posts API")
+@allure.story("GET all posts")
+@allure.title("GET /posts returns list of 100 posts")
+@allure.severity(allure.severity_level.NORMAL)
 def test_get_all_posts_returns_list(posts_client):
     """GET /posts возвращает список из 100 постов."""
     response = posts_client.get_all_posts()
@@ -31,6 +39,10 @@ def test_get_all_posts_returns_list(posts_client):
     assert len(posts) == 100
 
 
+@allure.feature("Posts API")
+@allure.story("POST create post")
+@allure.title("POST /posts creates a new post")
+@allure.severity(allure.severity_level.CRITICAL)
 def test_create_post(posts_client):
     """POST /posts создаёт новый пост."""
     response = posts_client.create_post(
@@ -46,6 +58,10 @@ def test_create_post(posts_client):
     assert "id" in body
 
 
+@allure.feature("Posts API")
+@allure.story("PUT update post")
+@allure.title("PUT /posts/1 updates the post")
+@allure.severity(allure.severity_level.NORMAL)
 def test_update_post(posts_client):
     """PUT /posts/1 обновляет пост."""
     response = posts_client.update_post(1, title="Updated Title")
@@ -54,6 +70,10 @@ def test_update_post(posts_client):
     assert response.json()["title"] == "Updated Title"
 
 
+@allure.feature("Posts API")
+@allure.story("DELETE post")
+@allure.title("DELETE /posts/1 returns 200")
+@allure.severity(allure.severity_level.NORMAL)
 def test_delete_post(posts_client):
     """DELETE /posts/1 возвращает 200."""
     response = posts_client.delete_post(1)
@@ -61,6 +81,10 @@ def test_delete_post(posts_client):
     assert response.status_code == 200
 
 
+@allure.feature("Posts API")
+@allure.story("Status codes")
+@allure.title("GET /posts/{id} returns expected status codes")
+@allure.severity(allure.severity_level.NORMAL)
 @pytest.mark.parametrize("post_id,expected_status", [
     (1, 200),
     (100, 200),
@@ -72,6 +96,10 @@ def test_get_post_status_codes(posts_client, post_id, expected_status):
     assert response.status_code == expected_status
 
 
+@allure.feature("Posts API")
+@allure.story("Response validation")
+@allure.title("GET /posts/1 returns correct response structure")
+@allure.severity(allure.severity_level.NORMAL)
 def test_post_has_correct_structure(posts_client):
     """Проверяем структуру ответа."""
     response = posts_client.get_post(1)

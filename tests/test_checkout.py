@@ -1,8 +1,13 @@
+import allure
 from pages.inventory_page import InventoryPage
 from pages.cart_page import CartPage
 from pages.checkout_page import CheckoutPage
 
 
+@allure.feature("Checkout")
+@allure.story("End-to-end purchase")
+@allure.title("Full checkout flow from login to order completion")
+@allure.severity(allure.severity_level.BLOCKER)
 def test_full_checkout_flow(inventory_page: InventoryPage):
     """Полный сценарий: логин → товар → корзина → оформление → заказ."""
     inventory_page.expect_opened()
