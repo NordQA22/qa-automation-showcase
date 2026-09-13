@@ -5,3 +5,6 @@ class InventoryLocators:
     CART_LINK = ".shopping_cart_link"
     INVENTORY_ITEM = ".inventory_item"
     ITEM_BUTTON = "button"
+    SORT_DROPDOWN = "[data-test='product-sort-container']"
+    ITEM_NAME = ".inventory_item_name"
+    ITEM_PRICE = ".inventory_item_price"

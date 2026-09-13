@@ -13,6 +13,9 @@ class InventoryPage:
         self.title = page.locator(InventoryLocators.TITLE)
         self.cart_badge = page.locator(InventoryLocators.CART_BADGE)
         self.cart_link = page.locator(InventoryLocators.CART_LINK)
+        self.sort_dropdown = page.locator(InventoryLocators.SORT_DROPDOWN)
+        self.item_names = page.locator(InventoryLocators.ITEM_NAME)
+        self.item_prices = page.locator(InventoryLocators.ITEM_PRICE)
 
     def expect_opened(self):
         expect(self.page).to_have_url(self.URL)
@@ -27,3 +30,24 @@ class InventoryPage:
 
     def go_to_cart(self):
         self.cart_link.click()
+
+    # --- Sorting ---
+
+    def sort_by(self, option: str):
+        """Сортировка: 'az', 'za', 'lohi', 'hilo'."""
+        self.sort_dropdown.select_option(option)
+
+    def get_item_names(self) -> list[str]:
+        return self.item_names.all_inner_texts()
+
+    def get_item_prices(self) -> list[float]:
+        prices = self.item_prices.all_inner_texts()
+        return [float(p.replace("$", "")) for p in prices]
+
+    # --- Reset state ---
+
+    def reset_app_state(self):
+        """Сброс состояния через меню."""
+        self.page.locator("#react-burger-menu-btn").click()
+        self.page.locator("#reset_sidebar_link").click()
+    

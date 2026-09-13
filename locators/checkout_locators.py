@@ -6,3 +6,5 @@ class CheckoutLocators:
     CONTINUE_BUTTON = "#continue"
     FINISH_BUTTON = "#finish"
     COMPLETE_HEADER = ".complete-header"
+    ERROR_MESSAGE = "[data-test='error']"
+
