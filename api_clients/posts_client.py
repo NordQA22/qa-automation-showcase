@@ -1,10 +1,11 @@
 import requests
+from config.settings import JSONPLACEHOLDER_BASE_URL
 
 
 class PostsClient:
     """Клиент для работы с JSONPlaceholder API."""
 
-    BASE_URL = "https://jsonplaceholder.typicode.com"
+    BASE_URL = JSONPLACEHOLDER_BASE_URL
 
     def __init__(self):
         self.session = requests.Session()

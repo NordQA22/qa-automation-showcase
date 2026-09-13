@@ -1,11 +1,12 @@
 from playwright.sync_api import Page, expect
 from locators.cart_locators import CartLocators
+from config.settings import SAUCEDEMO_CART_URL
 
 
 class CartPage:
     """Page Object для страницы корзины."""
 
-    URL = "https://www.saucedemo.com/cart.html"
+    URL = SAUCEDEMO_CART_URL
 
     def __init__(self, page: Page):
         self.page = page

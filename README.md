@@ -41,7 +41,8 @@ qa-automation-showcase/
 │
 ├── config/
 │   ├── __init__.py
-│   └── credentials.py             # Test credentials (real projects: .gitignore)
+│   ├── credentials.py             # Test credentials (real projects: .gitignore)
+│   └── settings.py                # URLs for UI and API targets
 │
 ├── fixtures/
 │   ├── __init__.py
@@ -99,7 +100,7 @@ The project follows **Page Object Model** (UI) and **API Client** (API) patterns
 - **`pages/`** — page objects with actions and assertions. No raw selectors inside — only references to locators.
 - **`api_clients/`** — API client classes with methods for each HTTP endpoint.
 - **`fixtures/`** — reusable pytest fixtures for setup (login, page initialization).
-- **`config/`** — test data and credentials.
+- **`config/`** — test data, credentials, and environment URLs.
 - **`tests/`** — clean, readable tests using page objects and API clients.
 
 ## 🌐 Cross-Browser Testing

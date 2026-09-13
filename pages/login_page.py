@@ -1,11 +1,12 @@
 from playwright.sync_api import Page, expect
 from locators.login_locators import LoginLocators
+from config.settings import SAUCEDEMO_URL
 
 
 class LoginPage:
     """Page Object для страницы входа saucedemo.com."""
 
-    URL = "https://www.saucedemo.com/"
+    URL = SAUCEDEMO_URL
 
     def __init__(self, page: Page):
         self.page = page

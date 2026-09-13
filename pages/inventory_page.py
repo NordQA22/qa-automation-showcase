@@ -1,11 +1,12 @@
 from playwright.sync_api import Page, expect
 from locators.inventory_locators import InventoryLocators
+from config.settings import SAUCEDEMO_INVENTORY_URL
 
 
 class InventoryPage:
     """Page Object для страницы товаров (каталога) saucedemo.com."""
 
-    URL = "https://www.saucedemo.com/inventory.html"
+    URL = SAUCEDEMO_INVENTORY_URL
 
     def __init__(self, page: Page):
         self.page = page
