@@ -53,7 +53,7 @@ qa-automation-showcase/
 │       ├── BUG-003-last-name-field-overwrites-first-name.md
 │       ├── BUG-004-validation-shows-all-fields-required.md
 │       ├── BUG-005-wrong-product-images.md
-│       └── screenshots/
+│       └── screenshots/           # GIFs and PNGs for bug reports
 │
 ├── fixtures/
 │   ├── __init__.py
