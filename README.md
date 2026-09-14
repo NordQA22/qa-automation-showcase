@@ -33,7 +33,7 @@ qa-automation-showcase/
 │
 ├── .github/
 │   └── workflows/
-│       └── tests.yml              # CI: 3 browsers × 15 tests
+│       └── tests.yml              # CI: 3 browsers × 35 tests
 │
 ├── api_clients/
 │   ├── __init__.py
@@ -43,6 +43,17 @@ qa-automation-showcase/
 │   ├── __init__.py
 │   ├── credentials.py             # Test credentials (real projects: .gitignore)
 │   └── settings.py                # URLs for UI and API targets
+│
+├── docs/
+│   ├── allure-report.png          # Allure report screenshot
+│   └── bug-reports/
+│       ├── README.md
+│       ├── BUG-001-sorting-not-working.md
+│       ├── BUG-002-add-to-cart-not-working-for-some-items.md
+│       ├── BUG-003-last-name-field-overwrites-first-name.md
+│       ├── BUG-004-validation-shows-all-fields-required.md
+│       ├── BUG-005-wrong-product-images.md
+│       └── screenshots/
 │
 ├── fixtures/
 │   ├── __init__.py
@@ -65,11 +76,17 @@ qa-automation-showcase/
 ├── tests/
 │   ├── api/
 │   │   ├── __init__.py
-│   │   └── test_posts.py          # 9 API tests
+│   │   ├── test_posts.py
+│   │   ├── test_users.py
+│   │   ├── test_filtering.py
+│   │   └── test_headers.py
 │   ├── __init__.py
-│   ├── test_login.py              # 3 UI tests
-│   ├── test_cart.py               # 2 UI tests
-│   └── test_checkout.py           # 1 E2E test
+│   ├── test_login.py
+│   ├── test_cart.py
+│   ├── test_cart_empty.py
+│   ├── test_checkout.py
+│   ├── test_checkout_negative.py
+│   └── test_sorting.py
 │
 ├── .gitignore
 ├── conftest.py                    # pytest_plugins + Allure screenshot hook
@@ -81,16 +98,32 @@ qa-automation-showcase/
 ## ✅ Test Coverage
 
 ### UI Tests (SauceDemo)
-- **Login:** successful login, locked-out user, wrong password
-- **Cart:** add one item, add multiple items
-- **Checkout:** full end-to-end flow (login → cart → checkout → order complete)
+- **Login:** successful login, parametrized negative scenarios (locked-out, wrong password)
+- **Cart:** add one item, add multiple items, empty cart state
+- **Checkout:** full end-to-end flow, negative scenarios (empty fields)
+- **Sorting:** by name (A→Z, Z→A), by price (low→high, high→low)
 
 ### API Tests (JSONPlaceholder)
-- **GET:** retrieve single post, retrieve all posts, status codes (200/404)
+- **GET:** single post, all posts, status codes (200/404)
 - **POST:** create a new post
 - **PUT:** update an existing post
 - **DELETE:** delete a post
+- **Filtering:** posts by userId, comments by postId (query parameters)
+- **Users:** nested objects (address, company, geo)
+- **Headers:** response Content-Type validation
 - **Validation:** response structure, required fields, data types
+
+## 🐛 Manual QA: Bug Reports
+
+In addition to automated tests, manual exploratory testing was performed on SauceDemo. Found bugs are documented in [`docs/bug-reports/`](docs/bug-reports/).
+
+| ID | Title | Severity | Priority |
+|----|-------|----------|----------|
+| [BUG-001](docs/bug-reports/BUG-001-sorting-not-working.md) | Sorting does not work for problem_user | Major | High |
+| [BUG-002](docs/bug-reports/BUG-002-add-to-cart-not-working-for-some-items.md) | "Add to cart" works only for 3 of 6 products | Major | High |
+| [BUG-003](docs/bug-reports/BUG-003-last-name-field-overwrites-first-name.md) | Last Name field overwrites First Name | Critical | High |
+| [BUG-004](docs/bug-reports/BUG-004-validation-shows-all-fields-required.md) | Validation shows "required" error for all fields | Critical | High |
+| [BUG-005](docs/bug-reports/BUG-005-wrong-product-images.md) | All products show the same image | Major | Medium |
 
 ## 🏗️ Architecture
 
